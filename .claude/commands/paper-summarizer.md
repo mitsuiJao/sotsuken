@@ -82,35 +82,59 @@ pdftoppm -jpeg -r 150 -f 1 -l 1 /path/to/file.pdf /tmp/page
 ---
  
 ## ファイル名の生成ルール
- 
-- **ファイルパス引数の場合**: 元のPDF名を基にして `_sumarry.md` をつける
-  - 例：`Investor sentiment and optimizing traditional quantitative investments.pdf` → `Investor_sentiment_and_optimizing_traditional_quantitative_investments_sumarry.md`
+
+PDFから著者名と掲載年を抽出し、以下の形式で生成する：
+
+**形式**: `FirstName_LastName&FirstName_LastName&...&FirstName_LastName_Year.md`
+
+### 処理ステップ
+
+1. **著者情報の抽出**
+   - PDFの1ページ目から著者名（すべて）と掲載年を抽出
+   - 著者名が複数の場合は全員を列挙
+
+2. **著者名のフォーマット**
+   - 各著者を `FirstName_LastName` 形式に正規化
+   - 複数著者は `&` で区切る
+   - 例：`Zheng Chen, Wenlin Li, Jia Huang` → `Zheng_Chen&Wenlin_Li&Jia_Huang_2025`
+
+3. **年の抽出**
+   - 掲載年（発表年）をファイル名の末尾に追加
+   - 形式：`{著者}&..._{YYYY}.md`
+
+### 例
+- 単一著者：`Amos Tversky, Daniel Kahneman, 1974` → `Amos_Tversky&Daniel_Kahneman_1974.md`
+- 複数著者：`Shimaa Ouf, Mona El Hawary, Amal Aboutabl, Sherif Adel, 2025` → `Shimaa_Ouf&Mona_El_Hawary&Amal_Aboutabl&Sherif_Adel_2025.md`
+
 ---
  
 ## 出力手順
  
 1. 要約Markdownを生成
 2. ファイルパス引数で呼ばれた場合のみ、以下を実行：
-   - 要約を `doc/sumarry/` ディレクトリに保存（ファイル名形式：`{PDF名前}_sumarry.md`）
-   - `doc/list.md` に自動追記（後述の「doc/list.md への追記」参照）
+   - PDFから著者名と掲載年を抽出
+   - ファイル名を `FirstName_LastName&FirstName_LastName_Year.md` 形式で生成
+   - 要約を `doc/thesis/sumarry/` ディレクトリに保存
+   - `doc/thesis/list.md` に自動追記（後述の「doc/list.md への追記」参照）
 3. 会話中に要約の概要を1〜2文だけ添える（長い説明は不要）
 
 ## doc/list.md への追記
  
 現在の形式に従い、以下の順で追記：
 ```markdown
-### [PDF名][ref番号.1]
+### [FirstName_LastName&FirstName_LastName_Year.pdf][ref番号.1]
 [sumarry][ref番号.2]
 {生成した要約ファイルの冒頭に記述された説明をコピー}
 
 ---
 
-[ref番号.1]: ./PDF%20filename.pdf
-[ref番号.2]: ./sumarry/PDF_name_sumarry.md
+[ref番号.1]: ./FirstName_LastName&FirstName_LastName_Year.pdf
+[ref番号.2]: ./sumarry/FirstName_LastName&FirstName_LastName_Year.md
 ```
 
 - 既存の最後の参照定義の番号を確認して、適切な ref 番号を割り当てる
-- 日本語説明は生成した `*_sumarry.md` ファイルの冒頭から抽出してコピー
+- 日本語説明は生成した要約ファイル（FirstName_LastName&..._Year.md）の冒頭から抽出してコピー
+- ファイルパスに含まれる `&` は URL エンコード `%26` に変換する必要がある場合がある
 ---
  
 ## 注意事項
@@ -120,4 +144,80 @@ pdftoppm -jpeg -r 150 -f 1 -l 1 /path/to/file.pdf /tmp/page
 - 図・表の内容は文章で補完する（画像は埋め込まない）
 - 著者の主張と実験結果を混同しないよう区別して書く
 - 論文が長大な場合（50ページ超）は主要セクションに絞り、付録は省略してよい
+
+---
+
+## 探索モード
+
+### トリガー条件
+
+以下のいずれかが入力に含まれるとき探索モードを発動する：
+
+- 「関連論文」＋「探して／見つけて／ダウンロード／取得／まとめて」のいずれか
+- 「参考文献」＋「探して／調べて／ダウンロード／取得」のいずれか
+- 「論文を集めて」「論文を探して」
+
+**補助引数（オプション）**：
+- `--discover <path>` — 起点となる論文PDFを指定
+- 引数なしの場合は `doc/thesis/sumarry/` 全体の要約内容をキーワード源とする
+
+### Step 1: 探索起点の決定
+
+1. `--discover <path>` が指定されていればそのPDF
+2. 会話中に論文が言及されていれば、その論文
+3. どちらもなければ `doc/thesis/sumarry/` 内のすべての要約ファイル（FirstName_LastName&..._.md）から卒論テーマキーワードを抽出
+
+### Step 2: 候補論文の収集
+
+**ルートA: 参考文献の抽出**（起点PDFがある場合）
+
+```bash
+pdftotext -layout "<起点PDF>" - | grep -A 2000 -iE "^[[:space:]]*(References|Bibliography|参考文献)"
+```
+
+抽出したテキストから著者・タイトル・年を解析してリストを作成する。
+
+**ルートB: WebSearch**（常に実施）
+
+以下のようなクエリでarXiv・Semantic Scholar等を検索し候補を追加する：
+```
+"<起点論文タイトルの一部> stock prediction sentiment analysis 2023 OR 2024 OR 2025"
+```
+
+### Step 3: Claudeによる絞り込み
+
+収集した候補から以下の基準で **3〜5件** を選定する：
+
+- 卒論テーマ（感情分析・株価予測・LLM・SHAP・テクニカル指標）との関連度が高い
+- `doc/thesis/` にすでに同名・類似ファイルが存在しない（重複排除）
+- 2020年以降の論文を優先
+
+### Step 4: PDF URLの特定とダウンロード
+
+各選定論文について PDF URL を特定する：
+1. arXiv: `arxiv.org/abs/XXXX` → `arxiv.org/pdf/XXXX` に変換
+2. 直接 PDF URL が判明している場合: そのまま使用
+3. 不明な場合: WebSearch で `"<タイトル>" filetype:pdf` または `"<タイトル>" arxiv` を再検索
+
+```bash
+# ファイル名はタイトルから生成（スペース保持、既存命名規則に倣う）
+curl -L --fail -o "doc/thesis/<タイトル>.pdf" "<pdf_url>"
+```
+
+- ダウンロード失敗（ペイウォール・404等）→ スキップして次へ
+- 重複ファイルが存在する場合 → スキップ
+
+### Step 5: 要約・保存
+
+ダウンロード成功した各PDFに対して「ファイルパス引数の処理」フローを実行する：
+- `pdftotext -layout <path> -` でテキスト抽出（失敗時は `pdftoppm` でリトライ）
+- PDFから著者名と掲載年を抽出し、`FirstName_LastName&FirstName_LastName_Year.md` 形式でファイル名を生成
+- `doc/thesis/sumarry/` に要約を保存
+- `doc/thesis/list.md` に追記
+
+### Step 6: 完了報告
+
+会話内で以下を報告する：
+- 取得・要約した論文（件数・タイトル一覧）
+- スキップした論文とその理由（ペイウォール・重複・関連度低など）
 
