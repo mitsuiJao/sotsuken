@@ -1,20 +1,5 @@
-### [Zheng_Chen&Wenlin_Li&Jia_Huang_2025.pdf][ref1.1]
-**投資家センチメントによる伝統的クオンツ投資の最適化**
-[sumarry][ref1.2]
+## 基礎研究・先行研究
 
-株式フォーラムの投稿からセンチメントトレンド因子を構築しMACDへ統合することで、上海総合指数の短期売買戦略のリターン・シャープレシオを大幅に改善した。
-
-
----
-### [Shimaa_Ouf&Mona_El_Hawary&Amal_Aboutabl&Sherif_Adel_2025.pdf][ref2.1]
-**機械学習と深層学習による株価予測の性能比較分析**
-
-[sumarry][ref2.2]
-
-ハイパーパラメータのチューニングによりLSTM・XGBoost・RFの株価予測精度を定量的に改善し、LSTMが最良（RMSE 5.22→3.82）であることを示した。
-
-
----
 ### [Amos_Tversky&Daniel_Kahneman_1974.pdf][ref3.1]
 **不確実性下の判断：ヒューリスティクスとバイアス**
 
@@ -33,13 +18,65 @@
 
 
 ---
-### [Yuri_Kim&Sujin_Yoo&Seongbin_Park_2025.pdf][ref5.1]
-**ルールベースの株取引推薦システム：センチメント分析とテクニカル指標の統合**
+### [Werner_Antweiler&Murray_Frank_2001.pdf][ref14.1]
+**インターネット株式メッセージボードの情報内容に関する研究**
 
-[sumarry][ref5.2]
+[sumarry][ref14.2]
 
-ニュース感情スコア（TextBlob）とRSIを組み合わせたルールベースの売買推薦システムが、主要市場指数を上回る5〜7%台のリターンと89%超の正解率を個人投資家向け軽量設計で達成した。
+インターネット株式掲示板の投稿メッセージが株式市場の取引量や変動性に与える影響を、計算言語学手法で測定した実証研究。
 
+---
+### [Johan_Bollen&Huina_Mao&Xiao-Jun_Zeng_2010.pdf][ref15.1]
+**Twitterの気分指標が株式市場を予測する**
+
+[sumarry][ref15.2]
+
+Twitter投稿から抽出した「冷静さ（Calm）」次元の気分指標がDJIA株価変動を3〜4日先行して予測し、予測精度87.6%を達成。
+
+---
+### [Chen_Gu&Alexander_Kurov_2020.pdf][ref11.1]
+**ソーシャルメディアの情報的役割：Twitterセンチメントからの実証分析**
+
+[sumarry][ref11.2]
+
+Twitterの企業固有センチメントが株価リターンを「反転なし」で予測し、アナリスト推薦・目標株価・業績情報を先取りすることを実証した。
+
+読んだ
+
+---
+
+## 機械学習・深層学習による株価予測
+
+### [Shimaa_Ouf&Mona_El_Hawary&Amal_Aboutabl&Sherif_Adel_2025.pdf][ref2.1]
+**機械学習と深層学習による株価予測の性能比較分析**
+
+[sumarry][ref2.2]
+
+ハイパーパラメータのチューニングによりLSTM・XGBoost・RFの株価予測精度を定量的に改善し、LSTMが最良（RMSE 5.22→3.82）であることを示した。
+
+
+---
+
+## LLM・BERTを用いたセンチメント分析と株価予測
+
+### [Sungjae_Yoon&Hiroshi_Takahashi_2021.pdf][ref13.1]
+**過去のニュース発信傾向及びニュースのセンチメントによる日本株式市場の反応分析**
+
+[sumarry][ref13.2]
+
+FinBERTで分類した日本株ニュースのセンチメント「混在」状態が、出来高を有意に増加させることを高頻度データで実証した。
+
+読んだ
+
+---
+### [Kemal_Kirtac&Guido_Germano_2024.pdf][ref12.1]
+**大規模言語モデルによるセンチメントトレーディング**
+
+[sumarry][ref12.2]
+
+OPTモデルで96万件の金融ニュースを感情分析し、ロング・ショート戦略でシャープレシオ3.05・累積リターン355%を達成した。
+
+LLMの感情分析の方が効果が高い
 
 ---
 ### [Linyan_Ruan&Haiwei_Jiang_2025.pdf][ref6.1]
@@ -85,7 +122,28 @@ FinBERT で抽出した金融ニュース感情スコアを LSTM に統合する
 
 DeBERTa・RoBERTa・FinBERTの感情分析をLSTM等4アーキテクチャに統合し、感情特徴が一部モデルの株価予測を改善することを示した。
 
+---
 
+## センチメントとテクニカル指標の融合トレーディング戦略
+
+### [Zheng_Chen&Wenlin_Li&Jia_Huang_2025.pdf][ref1.1]
+**投資家センチメントによる伝統的クオンツ投資の最適化**
+
+[sumarry][ref1.2]
+
+株式フォーラムの投稿からセンチメントトレンド因子を構築しMACDへ統合することで、上海総合指数の短期売買戦略のリターン・シャープレシオを大幅に改善した。
+
+
+---
+### [Yuri_Kim&Sujin_Yoo&Seongbin_Park_2025.pdf][ref5.1]
+**ルールベースの株取引推薦システム：センチメント分析とテクニカル指標の統合**
+
+[sumarry][ref5.2]
+
+ニュース感情スコア（TextBlob）とRSIを組み合わせたルールベースの売買推薦システムが、主要市場指数を上回る5〜7%台のリターンと89%超の正解率を個人投資家向け軽量設計で達成した。
+
+
+---
 
 [ref1.1]: ./Zheng_Chen&Wenlin_Li&Jia_Huang_2025.pdf
 [ref1.2]: ./sumarry/Zheng_Chen&Wenlin_Li&Jia_Huang_2025.md
@@ -105,56 +163,6 @@ DeBERTa・RoBERTa・FinBERTの感情分析をLSTM等4アーキテクチャに統
 [ref8.2]: ./sumarry/Haojie_Liu&Zihan_Lin&Randall_Rojas_2025.md
 [ref9.1]: ./Qingyun_Zeng&Tingsong_Jiang_2025.pdf
 [ref9.2]: ./sumarry/Qingyun_Zeng&Tingsong_Jiang_2025.md
-
-
-
-### [Chen_Gu&Alexander_Kurov_2020.pdf][ref11.1]
-**ソーシャルメディアの情報的役割：Twitterセンチメントからの実証分析**
-
-[sumarry][ref11.2]
-
-Twitterの企業固有センチメントが株価リターンを「反転なし」で予測し、アナリスト推薦・目標株価・業績情報を先取りすることを実証した。
-
-読んだ
-
----
-### [Kemal_Kirtac&Guido_Germano_2024.pdf][ref12.1]
-**大規模言語モデルによるセンチメントトレーディング**
-
-[sumarry][ref12.2]
-
-OPTモデルで96万件の金融ニュースを感情分析し、ロング・ショート戦略でシャープレシオ3.05・累積リターン355%を達成した。
-
-LLMの感情分析の方が効果が高い
-
----
-### [Sungjae_Yoon&Hiroshi_Takahashi_2021.pdf][ref13.1]
-**過去のニュース発信傾向及びニュースのセンチメントによる日本株式市場の反応分析**
-
-[sumarry][ref13.2]
-
-FinBERTで分類した日本株ニュースのセンチメント「混在」状態が、出来高を有意に増加させることを高頻度データで実証した。
-
-読んだ
-
----
-### [Werner_Antweiler&Murray_Frank_2001.pdf][ref14.1]
-**インターネット株式メッセージボードの情報内容に関する研究**
-
-[sumarry][ref14.2]
-
-インターネット株式掲示板の投稿メッセージが株式市場の取引量や変動性に与える影響を、計算言語学手法で測定した実証研究。
-
----
-### [Johan_Bollen&Huina_Mao&Xiao-Jun_Zeng_2010.pdf][ref15.1]
-**Twitterの気分指標が株式市場を予測する**
-
-[sumarry][ref15.2]
-
-Twitter投稿から抽出した「冷静さ（Calm）」次元の気分指標がDJIA株価変動を3〜4日先行して予測し、予測精度87.6%を達成。
-
----
-
 [ref10.1]: ./Walid_Siala&Ahmed_Khanfir&Mike_Papadakis_2026.pdf
 [ref10.2]: ./sumarry/Walid_Siala&Ahmed_Khanfir&Mike_Papadakis_2026.md
 [ref11.1]: ./Chen_Gu%26Alexander_Kurov_2020.pdf
