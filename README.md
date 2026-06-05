@@ -18,20 +18,36 @@
 - あとgpu使うならcondaも検討
 
 
-claude: https://claude.ai/project/019d708f-e083-7161-bc6c-e9f2f2f8a929
+## link
 
----
-### API
-postman: https://www.postman.com/aaa666-9722/sotsuken/request/egyc86x/news-api?action=share&creator=25020975&active-environment=25020975-01aea5d4-b7e2-47ee-b913-0336cc86d4f0
+### dataset - FNSPID
 
----
-### ニュースデータ
-sabareesh88/FNSPID_nasdaq
+Zihan Dong, Xinyu Fan, Zhiyuan Peng - FNSPID: A Comprehensive Financial News Dataset in Time Series
+
+arXiv: https://arxiv.org/abs/2402.06698
+
+huggingface: https://huggingface.co/datasets/Zihan1004/FNSPID
+
+
+#### subset - FNSPID_nasdaq
 
 huggingface: https://huggingface.co/datasets/sabareesh88/FNSPID_nasdaq
 
 
-Zihan Dong, Xinyu Fan, Zhiyuan Peng
-FNSPID: A Comprehensive Financial News Dataset in Time Series
+### FinBERT
 
-arXiv: https://arxiv.org/abs/2402.06698
+Dogu Araci - FinBERT: Financial Sentiment Analysis with Pre-trained Language Models
+
+arXiv: https://arxiv.org/abs/1908.10063
+
+huggingface: https://huggingface.co/ProsusAI/finbert
+
+github: https://github.com/ProsusAI/finBERT
+
+
+### API(legacy)
+postman: https://www.postman.com/aaa666-9722/sotsuken/request/egyc86x/news-api?action=share&creator=25020975&active-environment=25020975-01aea5d4-b7e2-47ee-b913-0336cc86d4f0
+
+
+---
+claude: https://claude.ai/project/019d708f-e083-7161-bc6c-e9f2f2f8a929
