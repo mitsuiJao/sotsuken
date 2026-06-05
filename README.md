@@ -13,14 +13,18 @@
   - FNSPIDのnasdaqサブセット（sabareesh88/FNSPID_nasdaq）を使用
 
 ## その他
-XGBoostによる予測およびTreeSHAPによる特徴寮寄与の検証を検討
+- XGBoostによる予測およびTreeSHAPによる特徴寮寄与の検証を検討
+- dockerでも検証可能なようにする予定
+- あとgpu使うならcondaも検討
 
 
 claude: https://claude.ai/project/019d708f-e083-7161-bc6c-e9f2f2f8a929
 
+---
 ### API
 postman: https://www.postman.com/aaa666-9722/sotsuken/request/egyc86x/news-api?action=share&creator=25020975&active-environment=25020975-01aea5d4-b7e2-47ee-b913-0336cc86d4f0
 
+---
 ### ニュースデータ
 sabareesh88/FNSPID_nasdaq
 
