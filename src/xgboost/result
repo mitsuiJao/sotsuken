@@ -1,0 +1,16 @@
+[0]	validation_0-logloss:0.68647
+[50]	validation_0-logloss:0.70253
+[100]	validation_0-logloss:0.70863
+[150]	validation_0-logloss:0.71870
+[199]	validation_0-logloss:0.72512
+
+Accuracy: 0.5161
+              precision    recall  f1-score   support
+
+           0       0.44      0.41      0.42       148
+           1       0.57      0.60      0.58       193
+
+    accuracy                           0.52       341
+   macro avg       0.50      0.50      0.50       341
+weighted avg       0.51      0.52      0.51       341
+

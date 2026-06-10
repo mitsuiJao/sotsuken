@@ -1,4 +1,6 @@
 doc/thesis/ori/*.pdf
 data/news/
 
+__pycache__/
+
 .env
