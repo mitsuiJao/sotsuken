@@ -1,5 +1,4 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 import mplfinance as mpf
 import numpy as np
 
@@ -7,7 +6,7 @@ import numpy as np
 
 N = 14
 
-df = pd.read_parquet("./AAPL.parquet")
+df = pd.read_parquet("./data/stock/AAPL.parquet")
 df["diff"] = df["Close"].diff(1)
 print(df)
 
@@ -23,5 +22,5 @@ rsi = 100 - (100 / (1 + rs))
 
 rsi_trimmed = rsi.loc[stock.index]
 
-ap = mpf.make_addplot(rsi_trimmed, panel=1, color="blue", ylabel="RSI")
-mpf.plot(stock, type="candle", style="yahoo", volume=False, addplot=ap, savefig="./aapl_chart.png")
+ap = mpf.make_addplot(rsi_trimmed, panel=1, color="blue", ylabel="RSI", ylim=(0, 100))
+mpf.plot(stock, type="candle", style="yahoo", volume=False, addplot=ap, savefig="./data/chart/aapl_chart.png")

@@ -1,2 +1,4 @@
 doc/thesis/ori/*.pdf
+data/news/
+
 .env
