@@ -1,0 +1,16 @@
+┌──────────────────────────────┐
+│ train-00000-of-00048.parquet │
+│                              │
+│ Unnamed: 0           varchar │
+│ Date                 varchar │
+│ Article_title        varchar │
+│ Stock_symbol         varchar │
+│ Url                  varchar │
+│ Publisher            varchar │
+│ Author               varchar │
+│ Article              varchar │
+│ Lsa_summary          varchar │
+│ Luhn_summary         varchar │
+│ Textrank_summary     varchar │
+│ Lexrank_summary      varchar │
+└──────────────────────────────┘
