@@ -1,9 +1,14 @@
 import sentiment
 import pandas as pd
+from dotenv import load_dotenv
+from pathlib import Path
+import os
 
-PARQUIET_PATH = ""
+load_dotenv()
 
-df = pd.read_parquet(filepath=PARQUIET_PATH)
+PARQUIET_DIR = Path(os.getenv("FNSPID_PATH")) / "data"
+
+df = pd.read_parquet(filepath=PARQUIET_DIR / "AAPL_articles.parquet")
 
 rows = []
 for row in df.itertuples():
@@ -15,5 +20,4 @@ for row in df.itertuples():
     rows.append(daily)
 
 df_daily = pd.DataFrame(rows)
-
-df_daily.to_parquet("daily_sentiment.parquet", index=False)
+df_daily.to_parquet(PARQUIET_DIR / "daily_sentiment.parquet", index=False)
