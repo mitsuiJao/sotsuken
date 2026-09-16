@@ -5,5 +5,15 @@ PARQUIET_PATH = ""
 
 df = pd.read_parquet(filepath=PARQUIET_PATH)
 
-r = sentiment.get_sentiment("I love this product! It's amazing.")
-print(r)
+rows = []
+for row in df.itertuples():
+    daily_sentiment = sentiment.get_sentiment(row.Article)
+    daily = {
+        "Date": row.Date,
+        **daily_sentiment
+    }
+    rows.append(daily)
+
+df_daily = pd.DataFrame(rows)
+
+df_daily.to_parquet("daily_sentiment.parquet", index=False)
