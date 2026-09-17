@@ -5,7 +5,8 @@ import re
 
 pipe = pipeline(
     "text-classification",
-    model="ProsusAI/finbert"
+    model="ProsusAI/finbert",
+    device=0
 )
 
 def get_sentiment(texts):

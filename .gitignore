@@ -4,3 +4,5 @@ data/news/
 __pycache__/
 
 .env
+
+.venv*
