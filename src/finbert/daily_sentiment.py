@@ -6,20 +6,14 @@ import os
 
 load_dotenv()
 
-PARQUIET_DIR = Path(os.getenv("FNSPID_PATH")) / "data" / "AAPL_articles.parquet"
-print(PARQUIET_DIR)
+DATA_DIR = Path(os.getenv("FNSPID_PATH")) / "data"
+ARTICLES_PATH = DATA_DIR / "AAPL_articles.parquet"
+OUTPUT_PATH = DATA_DIR / "daily_sentiment.parquet"
+print(ARTICLES_PATH)
 
-df = pd.read_parquet(PARQUIET_DIR)
+df = pd.read_parquet(ARTICLES_PATH)
 
-rows = []
-for row in df.itertuples():
-    daily_sentiment = sentiment.get_sentiment(row.Article)
-    daily = {
-        "Date": row.Date,
-        **daily_sentiment
-    }
-    rows.append(daily)
-    print(row.Date, f"{len(rows)/len(df)*100:.2f}%")
+r = sentiment.process_all_articles(df)
 
-df_daily = pd.DataFrame(rows)
-df_daily.to_parquet(PARQUIET_DIR / "daily_sentiment.parquet", index=False)
+df_daily = pd.DataFrame(r)
+df_daily.to_parquet(OUTPUT_PATH, index=False)
