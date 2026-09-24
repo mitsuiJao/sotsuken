@@ -35,6 +35,6 @@ df_daily = (
 
 print(df_daily)
 
-df.to_parquet(OUTPUT_PATH, index=False)
+df_daily.to_parquet(OUTPUT_PATH, index=False)
 
 
