@@ -3,8 +3,6 @@ import pandas as pd
 from dotenv import load_dotenv
 from pathlib import Path
 import os
-from pandas.tseries.offsets import CustomBusinessDay
-from pandas.tseries.holiday import USFederalHolidayCalendar
 
 load_dotenv()
 
