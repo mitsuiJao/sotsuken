@@ -34,9 +34,12 @@ zero = pd.Series(0.0, index=stock.index)
 
 ap_ema = [
     mpf.make_addplot(zero, panel=0, color="black", width=0.8, linestyle="--", secondary_y=True, ylim=sent_ylim),
-    mpf.make_addplot(sentiment_trimmed["sent"], panel=0, color="lightblue", width=1.5, ylabel="Sentiment", label="sent", secondary_y=True, ylim=sent_ylim),
+    mpf.make_addplot(sentiment_trimmed["sent"], panel=0, color="lightblue", width=1.5, ylabel="センチメント", label="sent", secondary_y=True, ylim=sent_ylim),
     mpf.make_addplot(sentiment_trimmed["ema_short"], panel=0, color="blue", width=2, label=f"EMA{EMA_SHORT}", secondary_y=True, ylim=sent_ylim),
     # mpf.make_addplot(sentiment_trimmed["ema_long"], panel=0, color="orange", width=2, label=f"EMA{EMA_LONG}", secondary_y=True, ylim=sent_ylim),
-    mpf.make_addplot(sentiment_trimmed["n_news"], panel=1, type="bar", color="gray", ylabel="n_news"),
+    mpf.make_addplot(sentiment_trimmed["n_news"], panel=1, type="bar", color="gray", ylabel="記事数"),
 ]
-mpf.plot(stock, type="candle", style="yahoo", volume=False, addplot=ap_ema, panel_ratios=(3, 1), figsize=(16, 8), savefig="./data/chart/aapl_sentiment_ema_chart.png")
+# 日本語用フォントと文字サイズ
+style_jp = mpf.make_mpf_style(base_mpf_style="yahoo", rc={"font.family": "Noto Sans CJK JP", "font.size": 16})
+# mpf.plot(stock, type="candle", style=style_jp, volume=False, addplot=ap_ema, panel_ratios=(3, 1), figsize=(16, 8), ylabel="株価 (USD)", title="AAPL 株価とセンチメントスコア", savefig="./data/chart/aapl_sentiment_ema_chart_titled.png")
+mpf.plot(stock, type="candle", style=style_jp, volume=False, addplot=ap_ema, panel_ratios=(3, 1), figsize=(16, 8), ylabel="株価 (USD)", savefig="./data/chart/aapl_sentiment_ema_chart.png")
