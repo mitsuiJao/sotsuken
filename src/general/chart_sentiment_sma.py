@@ -25,7 +25,7 @@ ap = [
     mpf.make_addplot(sentiment_trimmed["sent"], panel=0, color="blue", width=1, secondary_y=True, ylabel="Sentiment"),
     mpf.make_addplot(sentiment_trimmed["n_news"], panel=1, type="bar", color="gray", ylabel="n_news"),
 ]
-mpf.plot(stock, type="candle", style="yahoo", volume=False, addplot=ap, savefig="./data/chart/aapl_sentiment_chart.png")
+mpf.plot(stock, type="candle", style="classic", volume=False, addplot=ap, savefig="./data/chart/aapl_sentiment_chart.png")
 
 # 0の基準線が入る範囲でデータに合わせる
 sent_pad = 0.02
@@ -34,12 +34,12 @@ zero = pd.Series(0.0, index=stock.index)
 
 ap_ema = [
     mpf.make_addplot(zero, panel=0, color="black", width=0.8, linestyle="--", secondary_y=True, ylim=sent_ylim),
-    mpf.make_addplot(sentiment_trimmed["sent"], panel=0, color="lightblue", width=1.5, ylabel="センチメント", label="sent", secondary_y=True, ylim=sent_ylim),
-    mpf.make_addplot(sentiment_trimmed["ema_short"], panel=0, color="blue", width=2, label=f"EMA{EMA_SHORT}", secondary_y=True, ylim=sent_ylim),
+    mpf.make_addplot(sentiment_trimmed["sent"], panel=0, color="blue", alpha=0.5, width=1.5, ylabel="センチメント", label="日次センチメントスコア", secondary_y=True, ylim=sent_ylim),
+    mpf.make_addplot(sentiment_trimmed["ema_short"], panel=0, color="red", width=2, label=f"日次センチメントスコア EMA{EMA_SHORT}", secondary_y=True, ylim=sent_ylim),
     # mpf.make_addplot(sentiment_trimmed["ema_long"], panel=0, color="orange", width=2, label=f"EMA{EMA_LONG}", secondary_y=True, ylim=sent_ylim),
     mpf.make_addplot(sentiment_trimmed["n_news"], panel=1, type="bar", color="gray", ylabel="記事数"),
 ]
 # 日本語用フォントと文字サイズ
-style_jp = mpf.make_mpf_style(base_mpf_style="yahoo", rc={"font.family": "Noto Sans CJK JP", "font.size": 16})
+style_jp = mpf.make_mpf_style(base_mpf_style="classic", rc={"font.family": "Noto Sans CJK JP", "font.size": 16})
 # mpf.plot(stock, type="candle", style=style_jp, volume=False, addplot=ap_ema, panel_ratios=(3, 1), figsize=(16, 8), ylabel="株価 (USD)", title="AAPL 株価とセンチメントスコア", savefig="./data/chart/aapl_sentiment_ema_chart_titled.png")
 mpf.plot(stock, type="candle", style=style_jp, volume=False, addplot=ap_ema, panel_ratios=(3, 1), figsize=(16, 8), ylabel="株価 (USD)", savefig="./data/chart/aapl_sentiment_ema_chart.png")
