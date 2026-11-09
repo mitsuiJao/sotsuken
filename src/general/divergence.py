@@ -27,7 +27,7 @@ def divergence(df_sto, df_sent, n=5, m=120):
 
 
 div = divergence(df_sto, df_sent, n=5, m=120)
-div.to_parquet("divergence.parquet")
+div.to_parquet(Path(__file__).resolve().parents[2] / "data" / "divergence.parquet")
 
 
 # グラフ
