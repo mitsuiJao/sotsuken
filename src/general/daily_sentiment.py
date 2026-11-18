@@ -1,14 +1,16 @@
 import pandas as pd
 from pathlib import Path
 import os
+import sys
 from dotenv import load_dotenv
 import pandas_market_calendars as mcal
 
 load_dotenv()
 
 DATA_DIR = Path(os.getenv("FNSPID_PATH"))
-ARTICLES_SENTIMENT_PATH = DATA_DIR / "AAPL_article_sentiment.parquet"
-OUTPUT_PATH = DATA_DIR / "AAPL_daily_sentiment.parquet"
+TICKER = sys.argv[1] if len(sys.argv) > 1 else "AAPL"
+ARTICLES_SENTIMENT_PATH = DATA_DIR / f"{TICKER}_article_sentiment.parquet"
+OUTPUT_PATH = DATA_DIR / f"{TICKER}_daily_sentiment.parquet"
 
 df = pd.read_parquet(ARTICLES_SENTIMENT_PATH)
 

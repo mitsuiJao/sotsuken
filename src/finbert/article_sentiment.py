@@ -3,12 +3,14 @@ import pandas as pd
 from dotenv import load_dotenv
 from pathlib import Path
 import os
+import sys
 
 load_dotenv()
 
 DATA_DIR = Path(os.getenv("FNSPID_PATH"))
-ARTICLES_PATH = DATA_DIR / "data" / "AAPL_articles.parquet"
-OUTPUT_PATH = DATA_DIR / "AAPL_article_sentiment.parquet"
+TICKER = sys.argv[1] if len(sys.argv) > 1 else "AAPL"
+ARTICLES_PATH = DATA_DIR / "data" / f"{TICKER}_articles.parquet"
+OUTPUT_PATH = DATA_DIR / f"{TICKER}_article_sentiment.parquet"
 print(ARTICLES_PATH)
 
 df = pd.read_parquet(ARTICLES_PATH)
