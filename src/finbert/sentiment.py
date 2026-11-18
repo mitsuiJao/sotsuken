@@ -40,7 +40,7 @@ def process_all_articles(df):
         boundaries.append((start, len(all_sentences)))
 
     results = list(
-        tqdm(pipe((s for s in all_sentences), batch_size=64), total=len(all_sentences))
+        tqdm(pipe((s for s in all_sentences), batch_size=64, truncation=True), total=len(all_sentences))
     )
 
     scores = []
